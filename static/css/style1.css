@@ -1,0 +1,461 @@
+/* RESET & BASICS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  color: white;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+/* 🌟 HEADER / NAVBAR */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1a1a1a;
+  padding: 20px 40px;
+  border-bottom: 2px solid #00ffe7;
+  box-shadow: 0 0 10px #00ffe7;
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #00ffe7;
+  text-shadow: 0 0 5px #00ffe7;
+  margin-bottom: 20px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+nav ul li a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #ff00c8;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ff00c8;
+}
+
+/* 🎶 HERO SECTION */
+.hero {
+  background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
+  padding: 100px 20px;
+  text-align: center;
+  border-top: 2px solid #ff00c8;
+  border-bottom: 2px solid #00ffe7;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #00ffe7;
+  text-shadow: 0 0 10px #00ffe7;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #cccccc;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #cccccc;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  text-align: center;
+  text-shadow: 0 0 5px rgba(0, 255, 231, 0.1);
+  padding: 0 15px;
+  animation: fadeInUp 1s ease-in-out both;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 🔍 SEARCH BAR */
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+#searchbar {
+  width: 320px;
+  padding: 12px 18px;
+  background-color: #1a1a1a;
+  border: 2px solid #00ffe7;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  transition: 0.3s ease-in-out;
+}
+
+#searchbar:focus {
+  border-color: #ff00c8;
+}
+
+button[type="submit"] {
+  padding: 12px 20px;
+  background-color: #ff00c8;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+  background-color: #d100a8;
+}
+
+/* 🎧 SONG CARD */
+#main_songs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+  border: 1px solid #333;
+  border-left: 5px solid #00ffe7;
+  padding: 20px 30px;
+  margin: 20px auto;
+  border-radius: 12px;
+  max-width: 900px;
+  box-shadow: 0 0 10px rgba(0, 255, 231, 0.3);
+  transition: transform 0.3s ease, border-left 0.3s;
+}
+
+#main_songs:hover {
+  transform: scale(1.02);
+  border-left: 5px solid #ff00c8;
+}
+
+/* CD IMAGE */
+#main_songs img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 25px;
+  box-shadow: 0 0 12px #00ffe7;
+  transition: transform 0.3s ease;
+}
+
+/* CD spins only when playing */
+#main_songs img.playing {
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* SONG DETAILS */
+#main_songs .song-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  color: #e0e0e0;
+}
+
+#main_songs .song-details span:nth-child(1) {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#main_songs .song-details span:nth-child(2) {
+  color: #00ffe7;
+  font-weight: bold;
+}
+
+#main_songs .song-details span:nth-child(3) {
+  color: #aaa;
+  font-size: 0.95rem;
+}
+
+/* AUDIO CONTROL */
+#main_songs audio {
+  width: 300px;
+  align-self: flex-end;
+  margin-left: 30px;
+  filter: drop-shadow(0 0 5px #00ffe7);
+}
+
+/* LOGIN FORM STYLING */
+/* LOGIN PAGE LAYOUT */
+.login-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+}
+
+/* LOGIN CARD */
+.login-container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px 35px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #00ffee50;
+  text-align: center;
+  width: 350px;
+  animation: fadeIn 1s ease;
+}
+
+.login-container h2 {
+  color: #00ffee;
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.login-container p {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 25px;
+}
+
+/* INPUT FIELDS */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* spacing between fields */
+}
+
+.input-group {
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 6px;
+  color: #aaa;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+  box-shadow: 0 0 10px #00ffee;
+}
+
+/* FORGOT PASSWORD LINK */
+.forgot-password {
+  text-align: right;
+  margin-top: -10px;
+}
+
+.forgot-password a {
+  font-size: 13px;
+  color: #00ffee;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+/* LOGIN BUTTON */
+.btn {
+  background: #ff00c8;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #d100a8;
+}
+
+/* SIGNUP LINK */
+.signup-text {
+  margin-top: 15px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.signup-text a {
+  color: #00ffee;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* 🎚 FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #1a1a1a;
+  color: #999;
+  border-top: 2px solid #00ffe7;
+  margin-top: 60px;
+  font-size: 0.9rem;
+}
+
+/* 🔄 ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 768px) {
+  #main_songs {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  #main_songs img {
+    margin-bottom: 10px;
+  }
+
+  #main_songs > div:last-of-type {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+
+  .content {
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  nav ul {
+    gap: 15px;
+  }
+
+  nav ul li a {
+    font-size: 1rem;
+  }
+}
+
+/* DOWNLOAD BUTTON */
+.download-btn {
+  display: inline-block;
+  background-color: #1abc9c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.download-btn:hover {
+  background-color: #16a085;
+  transform: translateY(-2px);
+}
+
+
+
+/* 🎵 ABOUT PAGE STYLING */
+.about-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  flex: 1;
+  animation: fadeInUp 0.8s ease;
+}
+
+.about-container {
+  max-width: 850px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 0 15px rgba(0, 255, 231, 0.2);
+  text-align: center;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #ddd;
+}
+
+.about-container h2 {
+  color: #00ffe7;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  margin-bottom: 20px;
+}
+
+.about-container strong {
+  color: #00ffe7;
+}
+
+/* Fade animation (shared with login page) */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

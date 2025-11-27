@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="static/css/style1.css">
+  <style>
+    h1 {
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      color: #00ffe7;
+      font-size: 2rem;
+      margin-bottom: 20px
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">🎧 MelodyMine</div>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/search" class="active">Search</a></li>
+        <li><a href="/about">AboutUs</a></li>
+        
+
+      </ul>
+    </nav>
+  </header>
+  <h1 style="text-align: center;">🎧 MelodyMine Music Downloader </h1>
+
+  <form action="" style="text-align: center;" method="post">
+    <input type="search" name="song-search" id="searchbar" placeholder="Search Song">
+    <button type="submit">Search </button>
+  </form>
+
+  {% for song in songs %}
+
+  <div id="main_songs">
+    <img src="{{ song['image'][1]['url']}}" alt="">
+    <div class="song-details">
+      <span>{{ song['name'] }}</span>
+      <span>BY {{ song['artists']['primary'][0]['name']}}</span>
+      <span>{{ song['duration']}} Seconds</span>
+    </div>
+    <audio src="{{ song['downloadUrl'][-1]['url']}}" controls></audio>
+  </div>
+
+  <div>
+    <!-- <div>
+    <a href="{{ song['downloadUrl'][-1]['url'] }}" download class="download-btn">⬇️ Download</a>
+</div> -->
+
+  </div>
+  </div>
+
+  {% endfor %}
+  <footer>
+    &copy; 2025 MelodyMine. All rights reserved.
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const songs = document.querySelectorAll("#main_songs");
+
+      songs.forEach(song => {
+        const audio = song.querySelector("audio");
+        const img = song.querySelector("img");
+
+        // When the song starts playing
+        audio.addEventListener("play", () => {
+          // Pause all other songs
+          songs.forEach(other => {
+            if (other !== song) {
+              const otherAudio = other.querySelector("audio");
+              const otherImg = other.querySelector("img");
+              otherAudio.pause();
+              otherImg.classList.remove("playing");
+            }
+          });
+
+          // Spin current CD
+          img.classList.add("playing");
+        });
+
+        // When paused or ended
+        audio.addEventListener("pause", () => {
+          img.classList.remove("playing");
+        });
+        audio.addEventListener("ended", () => {
+          img.classList.remove("playing");
+        });
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>
